@@ -1,5 +1,7 @@
 import React from "react";
 
+import Table from "../../Table/Table";
+
 const OverviewTable = (props) => {
 
     let rows = props.pairs.map((pair, index) => {
@@ -9,21 +11,11 @@ const OverviewTable = (props) => {
                 <td>{pair.range}</td>
             </tr>
         )
-    })    
+    });   
 
     return (
         <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Domain</th>
-                        <th>Range</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {rows}
-                </tbody>
-            </table>
+            <Table rows={rows}/>
             <button onClick={props.delete}>Delete</button>
             <button onClick={props.edit}>Edit</button>
         </div>

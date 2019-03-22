@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import FormUpdate from "../../components/FormUpdate/FormUpdate";
+import Form from "../../components/Form/Form";
+import Table from "../../components/Table/Table";
 
 class Edit extends Component {
 
@@ -32,35 +33,53 @@ class Edit extends Component {
                     <td>{pair.domain}</td>
                     <td>{pair.range}</td>
                     <td><button onClick={() => this.props.deleteRow(this.props.index, index)}>Delete</button></td>
-                    <td><button onClick={() => {this.showUpdateForm(this.props.index, index, this.props.arr); this.props.handleUpdate()}}>Update</button></td>
+                    <td><button onClick={() => {this.showUpdateForm(this.props.index, index, this.props.arr); this.props.handleTruthy("update")}}>Update</button></td>
                 </tr>
             )
         });
 
-        return (
-            <div>
-                {!this.props.update ?
-                    <>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Domain</th>
-                                <th>Range</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {rows}
-                        </tbody>
-                    </table>
+        let components;
+
+        if (!this.props.update && !this.props.add) {
+            components = (
+                <div>
+                    <Table rows={rows} />
+                    <button onClick={() => this.props.handleTruthy("add")}>Add row</button>
                     <button onClick={this.props.handleEdit}>Close Edit</button>
-                    </>
-            : <FormUpdate
-                handleUpdate={this.props.handleUpdate}
-                updatePair={this.state.updatePair}
-                updateRow={(e) => this.props.updateRow(e, this.state.pIndex, this.state.cIndex, this.state.updatePair)}
-                handleDomain={this.props.handleDomain}
-                handleRange={this.props.handleRange} />}
-            </div>					
+                </div>
+            )
+        } 
+        if (this.props.update) {
+            components = (
+                <div>
+                    <h4>Update row</h4>
+                    <Form
+                        value={this.state.updatePair}
+                        submit={(e) => this.props.updateRow(e, this.state.pIndex, this.state.cIndex, this.state.updatePair)}
+                        handleDomain={this.props.handleDomain}
+                        handleRange={this.props.handleRange} />
+                    <button onClick={() => this.props.handleTruthy("update")}>Cancel</button>
+                </div>
+            )       
+        }
+        if (this.props.add) {
+            components = (
+                <div>
+                    <h4>Add new row</h4>
+                    <Form
+                        value={[]}
+                        submit={(e) => this.props.updateRow(e, this.state.pIndex, this.state.cIndex, this.state.updatePair)}
+                        handleDomain={this.props.handleDomain}
+                        handleRange={this.props.handleRange} />
+                    <button onClick={() => this.props.handleTruthy("add")}>Cancel</button>
+                </div>
+            )
+        }
+
+        return (
+            <>
+            {components}
+            </>					
         );
     }
 }

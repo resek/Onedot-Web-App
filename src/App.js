@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import FormCreate from "./components/FormCreate/FormCreate";
+import Form from "./components/Form/Form";
 import ShowPairs from "./components/ShowPairs/ShowPairs";
 import Overview from "./components/Overview/Overview";
 import Edit from "./containers/Edit/Edit";
@@ -14,6 +14,7 @@ class App extends Component {
 		range: null,
 		edit: false,
 		update: false,
+		add: false,
 		index: null,
 	}
 
@@ -32,8 +33,8 @@ class App extends Component {
 		this.setState({edit: !this.state.edit, index: index})
 	}
 
-	handleUpdate = () => {
-		this.setState({update: !this.state.update})
+	handleTruthy = (param) => {
+		this.setState({[param]: !this.state[param]});
 	}
 	
 	addPairToMap = (e) => {
@@ -66,7 +67,6 @@ class App extends Component {
 			arr.splice(pIndex, 1);
 			edit = false;
 		}
-		console.log(arr);
 		localStorage.dictionaries = JSON.stringify(arr);
 		this.setState({arr: arr, edit: edit});
 	}
@@ -74,12 +74,9 @@ class App extends Component {
 	updateRow = (e, pIndex, cIndex, upadatePair) => {
 		e.preventDefault();
 		let arr = this.state.arr;
-		let domain;
-		let range;
+		let domain, range;
 		this.state.domain ? domain = this.state.domain : domain = upadatePair[0];
 		this.state.range ? range = this.state.range: range = upadatePair[1];
-		console.log(domain);
-		console.log(range);
 		arr[pIndex][cIndex][0] =  domain
 		arr[pIndex][cIndex][1] = range;
 		localStorage.dictionaries = JSON.stringify(arr);
@@ -92,15 +89,17 @@ class App extends Component {
 
 		if (!this.state.edit) {
 			components = (
-				<> 
-				<FormCreate
-					addPairToMap={this.addPairToMap} 
-					handleDomain={this.handleInput("domain")}
-					handleRange={this.handleInput("range")} />
-				<Overview 
-					arr={this.state.arr} 
-					delete={this.deleteDictionary}
-					edit={this.handleEdit} />
+				<>
+					<h4>Create dictionary:</h4>
+					<Form
+						value={[]}
+						submit={this.addPairToMap} 
+						handleDomain={this.handleInput("domain")}
+						handleRange={this.handleInput("range")} />
+					<Overview 
+						arr={this.state.arr} 
+						delete={this.deleteDictionary}
+						edit={this.handleEdit} />
 				</>
 			)
 		} 
@@ -108,9 +107,10 @@ class App extends Component {
 			components = (
 				<Edit
 					handleEdit={this.handleEdit}
-					handleUpdate={this.handleUpdate}
+					handleTruthy={this.handleTruthy}
 					deleteRow={this.deleteRow}
 					update={this.state.update}
+					add={this.state.add}
 					arr={this.state.arr}
 					index={this.state.index}
 					updateRow={this.updateRow}
