@@ -12,7 +12,11 @@ const Overview = (props) => {
         for (const [domain, range] of map) {
             pairs.push({domain, range});
         }
-        return <OverviewTable key={index} delete={() => {props.delete(index)}} pairs={pairs} />   
+        return <OverviewTable 
+            key={index} 
+            delete={() => {props.delete(index)}} 
+            edit={() => {props.edit(index)}}
+            pairs={pairs} />   
     });            
 
     return (

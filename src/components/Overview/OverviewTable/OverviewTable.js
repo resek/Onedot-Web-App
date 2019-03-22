@@ -25,6 +25,7 @@ const OverviewTable = (props) => {
                 </tbody>
             </table>
             <button onClick={props.delete}>Delete</button>
+            <button onClick={props.edit}>Edit</button>
         </div>
         
     );
