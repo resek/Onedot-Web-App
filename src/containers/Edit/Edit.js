@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import Form from "../../components/Form/Form";
 import Table from "../../components/Table/Table";
 
@@ -34,7 +33,7 @@ class Edit extends Component {
                     <td>{pair.range}</td>
                     <td><button onClick={() => this.props.deleteRow(this.props.index, index)}>Delete</button></td>
                     <td><button onClick={() => {this.showUpdateForm(this.props.index, index, this.props.arr); this.props.handleTruthy("update")}}>Update</button></td>
-                </tr>
+                </tr>               
             )
         });
 
@@ -44,8 +43,8 @@ class Edit extends Component {
             components = (
                 <div>
                     <Table rows={rows} />
-                    <button onClick={() => this.props.handleTruthy("add")}>Add row</button>
-                    <button onClick={this.props.handleEdit}>Close Edit</button>
+                    <button className="EditButton" onClick={() => this.props.handleTruthy("add")}>Add row</button>
+                    <button className="EditButton" onClick={this.props.handleEdit}>Close Edit</button>
                 </div>
             )
         } 
@@ -54,6 +53,7 @@ class Edit extends Component {
                 <div>
                     <h4>Update row</h4>
                     <Form
+                        message={this.props.message}
                         value={this.state.updatePair}
                         submit={(e) => this.props.updateRow(e, this.state.pIndex, this.state.cIndex, this.state.updatePair)}
                         handleDomain={this.props.handleDomain}
@@ -67,8 +67,9 @@ class Edit extends Component {
                 <div>
                     <h4>Add new row</h4>
                     <Form
+                        message={this.props.message}
                         value={[]}
-                        submit={(e) => this.props.updateRow(e, this.state.pIndex, this.state.cIndex, this.state.updatePair)}
+                        submit={(e) => this.props.addRow(e)}
                         handleDomain={this.props.handleDomain}
                         handleRange={this.props.handleRange} />
                     <button onClick={() => this.props.handleTruthy("add")}>Cancel</button>

@@ -1,5 +1,4 @@
 import React from "react";
-
 import Table from "../Table/Table";
 
 const ShowPairs = (props) => {
@@ -16,9 +15,9 @@ const ShowPairs = (props) => {
     }
 
     return (
-        <div>
+        <div className="Showpairs">
             <Table rows={pairs}/>
-            <button onClick={props.createDictionary}>Create</button>
+            <button id="create" onClick={props.createDictionary}>Create dictionary</button>
         </div> 
     );
 }

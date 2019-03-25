@@ -1,0 +1,61 @@
+.App {
+    text-align:  center;
+}
+
+.App h2 {
+    margin: 40px 0;
+}
+
+#domain {
+    margin-right: 15px;
+}
+
+.App table {
+    margin: 0 auto;
+    text-align: left;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+.App table, th, td {
+    padding: 5px;
+    border: 1px solid black;
+}
+
+.Display {
+    margin: 40px auto;
+    width: 600px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.Overview {
+    grid-column: 2;
+}
+
+.Overview div {
+    margin-bottom: 30px;
+}
+
+.Overview div button {
+    margin: 6px 6px 0 0;
+}
+
+.ShowPairs {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+#create {
+    margin-top: 6px;
+}
+
+.ErrorMessage {
+    height: 18px;
+    margin: 14px 0;
+    color: red;
+}
+
+.EditButton {
+    margin: 6px 6px 0 0;
+}

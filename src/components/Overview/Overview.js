@@ -1,5 +1,4 @@
 import React from 'react';
-
 import OverviewTable from "./OverviewTable/OverviewTable";
 
 const Overview = (props) => {
@@ -20,7 +19,7 @@ const Overview = (props) => {
     });            
 
     return (
-        <div>
+        <div className="Overview">
             {dictionaries}
         </div> 
     );  
