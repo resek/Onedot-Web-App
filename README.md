@@ -1,4 +1,5 @@
 To run app:
 
-npm install
+download or clone from github,
+npm install,
 npm start
